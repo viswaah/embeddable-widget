@@ -170,6 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
             margin-bottom: 1.7rem;
             border-bottom: 1px solid transparent;
             position: relative;
+            display: inline-block;
         }
         .default-link::after {
             content: '➝';
