@@ -174,15 +174,18 @@ document.addEventListener('DOMContentLoaded', () => {
         .default-link::after {
             content: '\\2192';
             position: absolute;
+            top: 50%;
+            transform: translate(-50%, 0);
             display: inline-block;
             margin-left: 5px;
             transition: all .3s;
+            font-size: inherit;
         }
         .default-link:hover {
             border-bottom: 1px solid #234bff;
         }
         .default-link:hover::after {
-            transform: translateX(10px);
+            transform: translate(-50%, 10px);
         }
         .default-list li {
             line-height: 1.8;
