@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
             content: '\\2192';
             position: absolute;
             top: 50%;
-            transform: translate(-50%, 0);
+            transform: translate(0, -50%);
             display: inline-block;
             margin-left: 5px;
             transition: all .3s;
@@ -186,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
             border-bottom: 1px solid #234bff;
         }
         .default-link:hover::after {
-            transform: translate(-50%, 10px);
+            transform: translate(10px, -50%);
         }
         .default-list li {
             line-height: 1.8;
