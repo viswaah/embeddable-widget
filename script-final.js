@@ -163,13 +163,14 @@ document.addEventListener('DOMContentLoaded', () => {
             height: 54px;
             margin-block: 1.2rem;
         }
-        .default-link:link, .default-link:visited {
+        .default-link, .default-link:link, .default-link:visited {
             color: #234bff;
             display: inline-block;
             text-decoration: none;
             transition: all .3s; 
             margin-bottom: 1.7rem;
             border-bottom: 1px solid transparent;
+            position: relative;
         }
         .default-link::after {
             content: '\\2192';
