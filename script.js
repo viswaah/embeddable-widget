@@ -90,4 +90,38 @@ document.addEventListener('DOMContentLoaded', () => {
         const el = createElementWithClassName({type: con.type, text: con.content, className: getClassName[con.type]})
         embedDiv.appendChild(el);
     }
+    const styleEl = document.createElement('style');
+    styleEl.innerHTML = `
+        .default-header {
+            margin-bottom: 1.2rem;
+            font-size: x-large;
+        }
+        .default-sub-header {
+            margin-bottom: 1.4rem;
+            font-size: large;
+        }
+        .default-paragraph {
+            margin-bottom: 1.7rem;
+            line-height: 1.8;
+        }
+        .default-image {
+            height: 54px;
+            margin-block: 1.2rem;
+        }
+        .default-link:link, .default-link:visited {
+            color: #234bff;
+            display: inline-block;
+            text-decoration: none;
+            padding: 3px;
+            transition: all .3s; 
+            margin-bottom: 1.7rem;
+            border-bottom: 1px solid #234bff;
+        }
+        
+        .default-link:hover {
+            background-color: #234bff;
+            color: #fff;
+        }
+    `;
+    document.head.append(styleEl);
 });
