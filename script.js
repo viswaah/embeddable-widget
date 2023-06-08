@@ -6,14 +6,17 @@ const createElementWithClassName = ({
     const el = document.createElement(type);
     if(type === 'img') {
         el.src = text;
+    } else if(type === 'a') {
+        el.href = text.href;
+        el.innerHTML = text.label;
     } else {
         el.innerHTML = text;
     }
-    el.classList.add(className);
+    el.setAttribute('class', className);
     return el;
 }
 
-const getContent = (companyName, linkClassName) => {
+const getContent = (companyName) => {
     return [
         {
             type: 'img',
@@ -45,7 +48,14 @@ const getContent = (companyName, linkClassName) => {
         },
         {
             type: 'p',
-            content: `Eftsure is a B2B payment protection service, which we also use to streamline and protect our supplier onboarding process. Whether a threat originates from within our organisation, a supplier or a third-party organisation, Eftsure helps protect our supplier base and reduces the risk of payment error, fraud attempts and cyber-crime. Eftsure’s alert system helps us avoid paying fraudsters instead of the correct recipients, lowering your risk of delayed payment. <a class=${linkClassName} href="https://eftsure.com/supplier-information/">Read more about Eftsure</a>.`
+            content: `Eftsure is a B2B payment protection service, which we also use to streamline and protect our supplier onboarding process. Whether a threat originates from within our organisation, a supplier or a third-party organisation, Eftsure helps protect our supplier base and reduces the risk of payment error, fraud attempts and cyber-crime. Eftsure’s alert system helps us avoid paying fraudsters instead of the correct recipients, lowering your risk of delayed payment.`
+        },
+        {
+            type: 'a',
+            content: {
+                label: 'Read more about Eftsure &rarr;',
+                href: 'https://eftsure.com/supplier-information/'
+            }
         },
         {
             type: 'h3',
@@ -68,13 +78,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const companyName = embedDiv.getAttribute('data-company-name');
 
     const getClassName = {
-        h2: headerClassName,
-        h3: subHeaderClassName,
-        p: paragraphClassName,
-        img: imageClassName
+        h2: "default-header " + headerClassName,
+        h3: "default-sub-header " + subHeaderClassName,
+        p: "default-paragraph " + paragraphClassName,
+        img: "default-image " + imageClassName,
+        a: "default-link " + linkClassName
     }
 
-    const content = getContent(companyName, linkClassName);
+    const content = getContent(companyName);
     for(const con of content) {
         const el = createElementWithClassName({type: con.type, text: con.content, className: getClassName[con.type]})
         embedDiv.appendChild(el);
