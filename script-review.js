@@ -165,7 +165,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         .default-link, .default-link:link, .default-link:visited {
             color: #234bff;
-            display: inline-block;
             text-decoration: none;
             transition: all .3s; 
             margin-bottom: 1.7rem;
@@ -173,14 +172,14 @@ document.addEventListener('DOMContentLoaded', () => {
             position: relative;
         }
         .default-link::after {
-            content: '\\2192';
-            position: absolute;
-            top: 50%;
-            transform: translate(0, -50%);
+            content: '➝';
             display: inline-block;
             margin-left: 5px;
             transition: all .3s;
-            font-size: inherit;
+            font-size: 20px;
+            position: absolute;
+            top: 50%;
+            transform: translate(0, -52%);
         }
         .default-link:hover {
             border-bottom: 1px solid #234bff;
