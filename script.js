@@ -53,7 +53,7 @@ const getContent = (companyName) => {
         {
             type: 'a',
             content: {
-                label: 'Read more about Eftsure &rarr;',
+                label: 'Read more about Eftsure',
                 href: 'https://eftsure.com/supplier-information/'
             }
         },
@@ -112,15 +112,22 @@ document.addEventListener('DOMContentLoaded', () => {
             color: #234bff;
             display: inline-block;
             text-decoration: none;
-            padding: 3px;
             transition: all .3s; 
             margin-bottom: 1.7rem;
+            border-bottom: 1px solid transparent;
+        }
+        .default-link::after {
+            content: '\\2192';
+            position: absolute;
+            display: inline-block;
+            margin-left: 5px;
+            transition: all .3s;
+        }
+        .default-link:hover {
             border-bottom: 1px solid #234bff;
         }
-        
-        .default-link:hover {
-            background-color: #234bff;
-            color: #fff;
+        .default-link:hover::after {
+            transform: translateX(10px);
         }
     `;
     document.head.append(styleEl);
