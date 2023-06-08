@@ -9,6 +9,10 @@ const createElementWithClassName = ({
     } else if(type === 'a') {
         el.href = text.href;
         el.innerHTML = text.label;
+    } else if(type === 'ol') {
+        for(li of text) {
+            el.innerHTML += `<li>${li.content}</li>`
+        }
     } else {
         el.innerHTML = text;
     }
@@ -64,6 +68,48 @@ const getContent = (companyName) => {
         {
             type: 'p',
             content: `If you’re an existing partner to <b>${companyName}</b>, you might still need to register with Eftsure. This is to protect both of our organisations from risks like external cyber-crime and employee error during the payment process. Once your details are verified by Eftsure, you will not need to be re-verified with any of your other customers who use Eftsure’s solution, although other companies may choose to request additional information or documentation.`
+        },
+        {
+            type: 'h3',
+            content: 'Is it safe to share my bank account details with Eftsure?'
+        },
+        {
+            type: 'p',
+            content: 'Yes. Eftsure follows best practices for securing data and its systems. It has been vetted by numerous industry leaders and is regularly audited and penetration-tested by external security specialists.'
+        }, 
+        {
+            type: 'a',
+            content: {
+                href: 'https://eftsure.com/security/',
+                label: 'Read more about its security credentials'
+            }
+        },
+        {
+            type: 'h3',
+            content : 'How do I securely share and verify my account details?'
+        },
+        {
+            type: 'p',
+            content: 'The communications you receive will include a link to register with Eftsure. The process asks you to submit details like your ABN, trading name and company address, as well as asking you to confirm payment information. You’ll have two options for confirming your bank account details:'
+        },
+        {
+            type: 'ol',
+            content: [
+                {
+                    content: '<b>Phone verification (slower):</b> Enter your account details manually. By selecting this option, you’ll receive a phone call from Eftsure to verify the provided details.'
+                },
+                {
+                    content: '<b>Bank login (faster):</b> Select your bank from the drop-down box, then enter your bank login details. Eftsure then verifies your account details automatically, with no need to verify over the phone unless the system detects an anomaly requiring further verification.'
+                }
+            ]
+        },
+        {
+            type: 'h3',
+            content: "I've verified - what's next?"
+        },
+        {
+            type: 'p',
+            content: 'Now you can get paid safely.'
         }
     ]
 }
@@ -75,6 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const paragraphClassName = embedDiv.getAttribute('data-paragraph-class');
     const imageClassName = embedDiv.getAttribute('data-image-class');
     const linkClassName = embedDiv.getAttribute('data-link-class');
+    const listClassName = embedDiv.getAttribute('data-list-class');
     const companyName = embedDiv.getAttribute('data-company-name');
 
     const getClassName = {
@@ -82,7 +129,8 @@ document.addEventListener('DOMContentLoaded', () => {
         h3: "default-sub-header " + subHeaderClassName,
         p: "default-paragraph " + paragraphClassName,
         img: "default-image " + imageClassName,
-        a: "default-link " + linkClassName
+        a: "default-link " + linkClassName,
+        ol: "default-list " + listClassName
     }
 
     const content = getContent(companyName);
@@ -90,6 +138,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const el = createElementWithClassName({type: con.type, text: con.content, className: getClassName[con.type]})
         embedDiv.appendChild(el);
     }
+    const ctaDiv = createElementWithClassName({type: 'div', className:'cta-div', text: ''});
+    embedDiv.appendChild(ctaDiv);
+    const ctaElement = createElementWithClassName({type: 'a', className: 'cta-link', text: {
+        href: 'https://eftsure.com',
+        label: 'Visit Eftsure.com for more information'
+    }});
+    ctaDiv.appendChild(ctaElement);
     const styleEl = document.createElement('style');
     styleEl.innerHTML = `
         .default-header {
@@ -128,6 +183,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         .default-link:hover::after {
             transform: translateX(10px);
+        }
+        .default-list li {
+            line-height: 1.8;
+        }
+        .default-list li:not(:last-child){
+            margin-bottom: 1rem;
+        }
+        .default-list {
+            margin-bottom: 1.7rem;
+        }
+        .cta-div {
+            display: flex;
+            justify-content: center;
+        }
+        .cta-link {
+            background: #234bff;
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            display: inline-block;
+            margin: 0 auto;
         }
         @media screen and (max-width:600px) {
             .default-image {
