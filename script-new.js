@@ -129,6 +129,11 @@ document.addEventListener('DOMContentLoaded', () => {
         .default-link:hover::after {
             transform: translateX(10px);
         }
+        @media screen and (max-width:600px) {
+            .default-image {
+                height: 42px;
+            }
+        }
     `;
     document.head.append(styleEl);
 });
