@@ -13,7 +13,7 @@ const createElementWithClassName = ({
     return el;
 }
 
-const getContent = (companyName) => {
+const getContent = (companyName, linkClassName) => {
     return [
         {
             type: 'img',
@@ -45,7 +45,7 @@ const getContent = (companyName) => {
         },
         {
             type: 'p',
-            content: 'Eftsure is a B2B payment protection service, which we also use to streamline and protect our supplier onboarding process. Whether a threat originates from within our organisation, a supplier or a third-party organisation, Eftsure helps protect our supplier base and reduces the risk of payment error, fraud attempts and cyber-crime. Eftsure’s alert system helps us avoid paying fraudsters instead of the correct recipients, lowering your risk of delayed payment. Read more about Eftsure.'
+            content: `Eftsure is a B2B payment protection service, which we also use to streamline and protect our supplier onboarding process. Whether a threat originates from within our organisation, a supplier or a third-party organisation, Eftsure helps protect our supplier base and reduces the risk of payment error, fraud attempts and cyber-crime. Eftsure’s alert system helps us avoid paying fraudsters instead of the correct recipients, lowering your risk of delayed payment. <a class=${linkClassName} href="https://eftsure.com/supplier-information/">Read more about Eftsure</a>.`
         },
         {
             type: 'h3',
@@ -64,6 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const subHeaderClassName = embedDiv.getAttribute('data-sub-header-class'); 
     const paragraphClassName = embedDiv.getAttribute('data-paragraph-class');
     const imageClassName = embedDiv.getAttribute('data-image-class');
+    const linkClassName = embedDiv.getAttribute('data-link-class');
     const companyName = embedDiv.getAttribute('data-company-name');
 
     const getClassName = {
@@ -72,7 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
         p: paragraphClassName,
         img: imageClassName
     }
-    const content = getContent(companyName);
+
+    const content = getContent(companyName, linkClassName);
     for(const con of content) {
         const el = createElementWithClassName({type: con.type, text: con.content, className: getClassName[con.type]})
         embedDiv.appendChild(el);
