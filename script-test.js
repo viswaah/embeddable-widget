@@ -116,13 +116,13 @@ const getContent = (companyName) => {
 
 document.addEventListener('DOMContentLoaded', () => {
     const embedDiv = document.getElementById('resource-embed');
-    const headerClassName = embedDiv.getAttribute('data-header-class'); 
-    const subHeaderClassName = embedDiv.getAttribute('data-sub-header-class'); 
-    const paragraphClassName = embedDiv.getAttribute('data-paragraph-class');
-    const imageClassName = embedDiv.getAttribute('data-image-class');
-    const linkClassName = embedDiv.getAttribute('data-link-class');
-    const listClassName = embedDiv.getAttribute('data-list-class');
-    const companyName = embedDiv.getAttribute('data-company-name');
+    const headerClassName = embedDiv.getAttribute('data-header-class') || ''; 
+    const subHeaderClassName = embedDiv.getAttribute('data-sub-header-class') || ''; 
+    const paragraphClassName = embedDiv.getAttribute('data-paragraph-class') || '';
+    const imageClassName = embedDiv.getAttribute('data-image-class') || '';
+    const linkClassName = embedDiv.getAttribute('data-link-class') || '';
+    const listClassName = embedDiv.getAttribute('data-list-class') || '';
+    const companyName = embedDiv.getAttribute('data-company-name') || 'this company';
 
     const getClassName = {
         h2: "default-header " + headerClassName,
